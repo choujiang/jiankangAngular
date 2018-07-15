@@ -1,0 +1,70 @@
+<div class="container ">
+  <div class="row full-high justify-content-center">
+    <form class="align-self-center col-9" ngNativeValidate *ngIf="step==1">
+      <div class="form-group">
+        <input class="form-control" [(ngModel)]="user.gonhao" name="gonhao" id="userId" placeholder="输入工号">
+      </div>
+      <button type="button" (click)="next()" class="btn btn-primary col-md-3 offset-md-6" *ngIf="step!=3">下一步</button>
+    </form>
+    <form class="align-self-center col-9" ngNativeValidate *ngIf="step==2">
+      <div class="form-group">
+        <input max="60" min="18" type="number" class="form-control" required placeholder="输入被保人年龄"
+               [(ngModel)]="user.age" name="age">
+      </div>
+      <div class="form-group">
+        <select class="form-control" name="gender" [(ngModel)]="user.gender" required>
+          <option [value]="undefined" disabled>选测性别</option>
+          <option *ngFor="let gender of genders" [value]="gender">
+            {{ gender }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control" name="during" [(ngModel)]="user.during" required>
+          <option [value]="undefined" selected disabled>选择投保年期</option>
+          <option *ngFor="let nianXian of touBaoNianXian" [value]="nianXian">
+            {{ nianXian }}
+          </option>
+        </select>
+      </div>
+      <div class="input-group">
+        <input type="number" class="form-control" placeholder="输入保险金额" required [(ngModel)]="user.baoXianJinE"
+               name="baoXianJinE">
+        <div class="input-group-append">
+          <span class="input-group-text">万元</span>
+        </div>
+      </div>
+      <br>
+      <div class="input-group">
+      <button type="button" (click)="next()" class="btn btn-primary col-md-3 offset-md-6" *ngIf="step!=3">下一步</button>
+      </div>
+    </form>
+
+    <form class="align-self-center col-9" ngNativeValidate *ngIf="step==3">
+      <div class="form-group">
+        <input class="form-control" placeholder="输入意外保额" [(ngModel)]="user.yiWaiBaoE" name="yiWaiBaoE">
+      </div>
+      <div class="form-group">
+        <select class="form-control" name="yiWaiJinTie" [(ngModel)]="user.yiWaiJinTie">
+          <option [value]="undefined" disabled>选择意外津贴</option>
+          <option *ngFor="let jt of jinTie" [value]="jt">
+            {{ jt }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="输入住院保额" [(ngModel)]="user.zhuYuanBaoE"
+               name="zhuYuanBaoE">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="输入百万医疗年龄" [(ngModel)]="user.baiWanYiliaoNanLing"
+               name="baiWanYiliaoNanLing">
+      </div>
+
+      <button type="button" (click)="download()" [disabled]="loading" class="btn btn-primary col-md-3 offset-md-6" *ngIf="step==3">生成PDF
+      </button>
+
+    </form>
+
+  </div>
+</div>
